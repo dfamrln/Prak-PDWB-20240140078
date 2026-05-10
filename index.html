@@ -1,0 +1,191 @@
+﻿<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halaman Utama</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Flip Card Animation */
+        .flip-card {
+            background-color: transparent;
+            width: 100%;
+            height: 400px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front,
+        .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 15px;
+            padding: 20px;
+        }
+
+        .flip-card-front {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .flip-card-back {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            transform: rotateY(180deg);
+        }
+
+        .button-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .menu-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: all 0.3s ease;
+            transform: scale(1);
+        }
+
+        .menu-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .menu-btn a {
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            display: block;
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 min-h-screen">
+
+    <section class="min-h-screen px-4 py-12">
+        <div class="w-full max-w-4xl mx-auto">
+            
+            <!-- Flip Card -->
+            <div class="flip-card mb-12">
+                <div class="flip-card-inner">
+                    <!-- Front Side -->
+                    <div class="flip-card-front shadow-2xl">
+                        <div>
+                            <h1 class="text-5xl font-bold mb-4">websitetssss🤫</h1>
+                            <p class="text-xl opacity-90">Arahkan kursor ke sini untuk mendapatkan 1 triliun usd</p>
+                        </div>
+                    </div>
+                    <!-- Back Side -->
+                    <div class="flip-card-back shadow-2xl">
+                        <div>
+                            <h2 class="text-3xl font-bold mb-4">Selamat anda kurang beruntung</h2>
+                            <p class="text-lg">Silakan coba lagi di lain waktu dan kesempatan🏃‍♂️‍➡️</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Menu Buttons -->
+            <div class="button-group">
+            </div>
+
+            <!-- Form Section with Select and Date -->
+            <div class="mt-20 bg-white bg-opacity-10 backdrop-blur-lg rounded-2xl p-8 border border-white border-opacity-20 shadow-2xl">
+                <h2 class="text-3xl font-bold text-white mb-8 text-center">📋 Formulir Data Diri</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Select Form Section -->
+                    <div class="form-group">
+                        <label class="block text-white font-semibold mb-3 text-lg">
+                            Pilih Tingkat Pendidikan
+                        </label>
+                        <select id="selectForm" class="w-full px-4 py-3 rounded-lg bg-white bg-opacity-90 text-gray-800 font-semibold border-2 border-purple-500 focus:outline-none focus:border-pink-500 transition">
+                            <option value="">-- Pilih Pendidikan --</option>
+                            <option value="SD">Sekolah Dasar Rebahan (SD)</option>
+                            <option value="SMP">Susah Move On (SMP)</option>
+                            <option value="SMA">Salah Milih Anime (SMA)</option>
+                            <option value="Diploma">D3 = Datang Duduk Diam (D3)</option>
+                            <option value="Sarjana">Timoty Gak Penting (S1)</option>
+                            <option value="Magister">S2 = Stres Kedua (S2)</option>
+                            <option value="Doktor">S3 = Sepuh Susah Senyum 😄 (S3)</option>
+                        </select>
+                        <div id="selectOutput" class="mt-4 p-4 rounded-lg bg-purple-500 bg-opacity-20 border border-purple-500 border-opacity-50 hidden">
+                            <p class="text-white text-sm">Pendidikan yang dipilih:</p>
+                            <p class="text-2xl font-bold text-purple-300" id="selectValue">-</p>
+                        </div>
+                    </div>
+
+                    <!-- Date Form Section -->
+                    <div class="form-group">
+                        <label class="block text-white font-semibold mb-3 text-lg">
+                            Pilih Tanggal Lahir
+                        </label>
+                        <input type="date" id="dateForm" class="w-full px-4 py-3 rounded-lg bg-white bg-opacity-90 text-gray-800 font-semibold border-2 border-pink-500 focus:outline-none focus:border-purple-500 transition">
+                        <div id="dateOutput" class="mt-4 p-4 rounded-lg bg-pink-500 bg-opacity-20 border border-pink-500 border-opacity-50 hidden">
+                            <p class="text-white text-sm">selamat ulang tahun🥳🎉:</p>
+                            <p class="text-2xl font-bold text-pink-300" id="dateValue">-</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <script>
+        // Handle Select Form
+        const selectForm = document.getElementById('selectForm');
+        const selectOutput = document.getElementById('selectOutput');
+        const selectValue = document.getElementById('selectValue');
+
+        selectForm.addEventListener('change', function() {
+            if (this.value) {
+                selectValue.textContent = this.value;
+                selectOutput.classList.remove('hidden');
+            } else {
+                selectOutput.classList.add('hidden');
+            }
+        });
+
+        // Handle Date Form
+        const dateForm = document.getElementById('dateForm');
+        const dateOutput = document.getElementById('dateOutput');
+        const dateValue = document.getElementById('dateValue');
+
+        dateForm.addEventListener('change', function() {
+            if (this.value) {
+                const selectedDate = new Date(this.value);
+                const options = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
+                const formattedDate = selectedDate.toLocaleDateString('id-ID', options);
+                dateValue.textContent = formattedDate;
+                dateOutput.classList.remove('hidden');
+            } else {
+                dateOutput.classList.add('hidden');
+            }
+        });
+    </script>
+
+</body>
+
+</html>
