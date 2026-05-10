@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Halaman Utama</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
-        /* Flip Card Animation */
         .flip-card {
             background-color: transparent;
             width: 100%;
@@ -54,6 +54,184 @@
             transform: rotateY(180deg);
         }
 
+        /* Flip Card 2 */
+        .flip-card-2 {
+            background-color: transparent;
+            width: 100%;
+            height: 480px;
+            perspective: 1200px;
+            cursor: pointer;
+        }
+
+        .flip-card-2-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.7s;
+            transform-style: preserve-3d;
+        }
+
+        .flip-card-2:hover .flip-card-2-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-2-front,
+        .flip-card-2-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .flip-card-2-front {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            gap: 10px;
+        }
+
+        .flip-card-2-back {
+            transform: rotateY(180deg);
+            background: #e8e4dc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* ID Card */
+        .id-card {
+            background: #f5f0e8;
+            width: 100%;
+            max-width: 400px;
+            border-radius: 6px;
+            overflow: hidden;
+            border: 2px solid #111;
+            box-shadow: 0 0 0 1px #cc0000, 5px 5px 0 #cc0000;
+            font-family: Arial, sans-serif;
+            color: #111;
+        }
+
+        .id-top-bar {
+            background: #cc0000;
+            height: 7px;
+        }
+
+        .id-header {
+            display: flex;
+            gap: 12px;
+            padding: 12px 14px 10px;
+            border-bottom: 2.5px solid #cc0000;
+            align-items: flex-start;
+            background: #fff;
+        }
+
+        .id-org-name {
+            font-size: 26px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: #111;
+            line-height: 1;
+        }
+
+        .id-org-sub {
+            font-size: 10px;
+            letter-spacing: 4px;
+            color: #555;
+            margin-top: 2px;
+        }
+
+        .id-num {
+            font-size: 11px;
+            font-family: monospace;
+            color: #333;
+            margin-top: 6px;
+        }
+
+        .id-badge {
+            display: inline-block;
+            background: #cc0000;
+            color: #fff;
+            font-size: 8px;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+            padding: 2px 8px;
+            margin-top: 5px;
+        }
+
+        .id-photo {
+            width: 90px;
+            height: 108px;
+            background: #ccc;
+            border: 2px solid #cc0000;
+            border-radius: 3px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 9px;
+            color: #888;
+            text-align: center;
+        }
+
+        .id-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .id-body {
+            padding: 10px 14px 14px;
+            background: #f5f0e8;
+        }
+
+        .id-name-row {
+            border-bottom: 1px solid #bbb;
+            padding-bottom: 6px;
+            margin-bottom: 8px;
+        }
+
+        .id-field-label {
+            font-size: 8px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #888;
+            font-weight: bold;
+        }
+
+        .id-field-value {
+            font-size: 16px;
+            font-weight: 800;
+            color: #111;
+            letter-spacing: 1px;
+            min-height: 20px;
+        }
+
+        .id-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px 14px;
+        }
+
+        .id-field-value-sm {
+            font-size: 12px;
+            font-family: monospace;
+            color: #111;
+            min-height: 16px;
+        }
+
+        .id-bottom-bar {
+            background: repeating-linear-gradient(90deg, #cc0000 0 12px, #111 12px 14px);
+            height: 5px;
+            margin-top: 10px;
+        }
+
         .button-group {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -78,6 +256,29 @@
             font-weight: 600;
             display: block;
         }
+
+        .class-btn {
+            padding: 7px 13px;
+            border: 2px solid #6b21a8;
+            background: transparent;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 700;
+            color: #d8b4fe;
+            transition: all 0.2s;
+            font-size: 14px;
+        }
+
+        .class-btn.active {
+            background: #7c3aed;
+            color: white;
+            border-color: #7c3aed;
+        }
+
+        .class-btn:hover {
+            border-color: #a855f7;
+            color: white;
+        }
     </style>
 </head>
 
@@ -85,68 +286,162 @@
 
     <section class="min-h-screen px-4 py-12">
         <div class="w-full max-w-4xl mx-auto">
-            
-            <!-- Flip Card -->
-            <div class="flip-card mb-12">
+
+            <!-- Flip Card 1 (Original) -->
+            <div class="flip-card mb-10">
                 <div class="flip-card-inner">
-                    <!-- Front Side -->
                     <div class="flip-card-front shadow-2xl">
-                        <div>
-                            <h1 class="text-5xl font-bold mb-4">websitetssss🤫</h1>
-                            <p class="text-xl opacity-90">Arahkan kursor ke sini untuk mendapatkan 1 triliun usd</p>
+                        <h1 class="text-5xl font-bold mb-4">websitetssss🤫</h1>
+                        <p class="text-xl opacity-90">Arahkan kursor ke sini untuk mendapatkan 1 triliun usd</p>
+                    </div>
+                    <div class="flip-card-back shadow-2xl">
+                        <h2 class="text-3xl font-bold mb-4">Selamat anda kurang beruntung</h2>
+                        <p class="text-lg">Silakan coba lagi di lain waktu dan kesempatan🏃‍♂️‍➡️</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flip Card 2 — ID Card -->
+            <div class="flip-card-2 mb-10">
+                <div class="flip-card-2-inner">
+                    <!-- Front -->
+                    <div class="flip-card-2-front shadow-2xl">
+                        <div class="text-6xl mb-2">🪪</div>
+                        <h2 class="text-3xl font-bold tracking-widest uppercase">ID Card</h2>
+                        <p class="text-base opacity-70 tracking-wider">Lihat kartu identitas kamu</p>
+                        <div class="mt-4 flex gap-3 flex-wrap justify-center text-sm opacity-60">
+                            <span class="border border-white border-opacity-30 rounded px-3 py-1">Nama</span>
+                            <span class="border border-white border-opacity-30 rounded px-3 py-1">Foto</span>
+                            <span class="border border-white border-opacity-30 rounded px-3 py-1">Pendidikan</span>
+                            <span class="border border-white border-opacity-30 rounded px-3 py-1">Tanggal Lahir</span>
                         </div>
                     </div>
-                    <!-- Back Side -->
-                    <div class="flip-card-back shadow-2xl">
-                        <div>
-                            <h2 class="text-3xl font-bold mb-4">Selamat anda kurang beruntung</h2>
-                            <p class="text-lg">Silakan coba lagi di lain waktu dan kesempatan🏃‍♂️‍➡️</p>
+                    <!-- Back — ID Card -->
+                    <div class="flip-card-2-back shadow-2xl">
+                        <div class="id-card" id="idCardPreview">
+                            <div class="id-top-bar"></div>
+                            <div class="id-header">
+                                <div style="flex:1">
+                                    <div class="id-org-name">MBG</div>
+                                    <div class="id-org-sub">corporation</div>
+                                    <div class="id-num">ID: <span id="cId">000000</span></div>
+                                    <div class="id-badge">EXPERIMENT PRB02</div>
+                                </div>
+                                <div class="id-photo" id="cPhotoBox">
+                                    <img id="cPhoto" src="" style="display:none">
+                                    <span id="cPhotoPlaceholder" style="line-height:1.4">PHOTO<br>HERE</span>
+                                </div>
+                            </div>
+                            <div class="id-body">
+                                <div class="id-name-row">
+                                    <div class="id-field-label">Nama</div>
+                                    <div class="id-field-value" id="cName">—</div>
+                                </div>
+                                <div class="id-grid">
+                                    <div>
+                                        <div class="id-field-label">Tanggal Lahir</div>
+                                        <div class="id-field-value-sm" id="cDob">—</div>
+                                    </div>
+                                    <div>
+                                        <div class="id-field-label">Pendidikan</div>
+                                        <div class="id-field-value-sm" id="cEdu">—</div>
+                                    </div>
+                                    <div>
+                                        <div class="id-field-label">Jabatan</div>
+                                        <div class="id-field-value-sm" id="cClass">—</div>
+                                    </div>
+                                    <div>
+                                        <div class="id-field-label">Status</div>
+                                        <div class="id-field-value-sm" style="color:#cc0000;font-weight:bold">AKTIF
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="id-bottom-bar"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Menu Buttons -->
-            <div class="button-group">
-            </div>
+            <div class="button-group"></div>
 
-            <!-- Form Section with Select and Date -->
-            <div class="mt-20 bg-white bg-opacity-10 backdrop-blur-lg rounded-2xl p-8 border border-white border-opacity-20 shadow-2xl">
+            <!-- Form Section -->
+            <div
+                class="mt-10 bg-white bg-opacity-10 backdrop-blur-lg rounded-2xl p-8 border border-white border-opacity-20 shadow-2xl">
                 <h2 class="text-3xl font-bold text-white mb-8 text-center">📋 Formulir Data Diri</h2>
-                
+
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <!-- Select Form Section -->
+
+                    <!-- Nama -->
+                    <div class="form-group md:col-span-2">
+                        <label class="block text-white font-semibold mb-3 text-lg">Nama Lengkap</label>
+                        <input type="text" id="inputName" placeholder="Masukkan nama kamu..."
+                            class="w-full px-4 py-3 rounded-lg bg-white bg-opacity-90 text-gray-800 font-semibold border-2 border-purple-500 focus:outline-none focus:border-pink-500 transition">
+                    </div>
+
+                    <!-- Pendidikan -->
                     <div class="form-group">
-                        <label class="block text-white font-semibold mb-3 text-lg">
-                            Pilih Tingkat Pendidikan
-                        </label>
-                        <select id="selectForm" class="w-full px-4 py-3 rounded-lg bg-white bg-opacity-90 text-gray-800 font-semibold border-2 border-purple-500 focus:outline-none focus:border-pink-500 transition">
+                        <label class="block text-white font-semibold mb-3 text-lg">Pilih Tingkat Pendidikan</label>
+                        <select id="selectForm"
+                            class="w-full px-4 py-3 rounded-lg bg-white bg-opacity-90 text-gray-800 font-semibold border-2 border-purple-500 focus:outline-none focus:border-pink-500 transition">
                             <option value="">-- Pilih Pendidikan --</option>
                             <option value="SD">Sekolah Dasar Rebahan (SD)</option>
                             <option value="SMP">Susah Move On (SMP)</option>
                             <option value="SMA">Salah Milih Anime (SMA)</option>
-                            <option value="Diploma">D3 = Datang Duduk Diam (D3)</option>
-                            <option value="Sarjana">Timoty Gak Penting (S1)</option>
-                            <option value="Magister">S2 = Stres Kedua (S2)</option>
-                            <option value="Doktor">S3 = Sepuh Susah Senyum 😄 (S3)</option>
+                            <option value="D3">D3 = Datang Duduk Diam (D3)</option>
+                            <option value="S1">Timoty Gak Penting (S1)</option>
+                            <option value="S2">S2 = Stres Kedua (S2)</option>
+                            <option value="S3">S3 = Sepuh Susah Senyum 😄 (S3)</option>
                         </select>
-                        <div id="selectOutput" class="mt-4 p-4 rounded-lg bg-purple-500 bg-opacity-20 border border-purple-500 border-opacity-50 hidden">
+                        <div id="selectOutput"
+                            class="mt-4 p-4 rounded-lg bg-purple-500 bg-opacity-20 border border-purple-500 border-opacity-50 hidden">
                             <p class="text-white text-sm">Pendidikan yang dipilih:</p>
                             <p class="text-2xl font-bold text-purple-300" id="selectValue">-</p>
                         </div>
                     </div>
 
-                    <!-- Date Form Section -->
+                    <!-- Tanggal Lahir -->
                     <div class="form-group">
-                        <label class="block text-white font-semibold mb-3 text-lg">
-                            Pilih Tanggal Lahir
-                        </label>
-                        <input type="date" id="dateForm" class="w-full px-4 py-3 rounded-lg bg-white bg-opacity-90 text-gray-800 font-semibold border-2 border-pink-500 focus:outline-none focus:border-purple-500 transition">
-                        <div id="dateOutput" class="mt-4 p-4 rounded-lg bg-pink-500 bg-opacity-20 border border-pink-500 border-opacity-50 hidden">
-                            <p class="text-white text-sm">selamat ulang tahun🥳🎉:</p>
+                        <label class="block text-white font-semibold mb-3 text-lg">Pilih Tanggal Lahir</label>
+                        <input type="date" id="dateForm"
+                            class="w-full px-4 py-3 rounded-lg bg-white bg-opacity-90 text-gray-800 font-semibold border-2 border-pink-500 focus:outline-none focus:border-purple-500 transition">
+                        <div id="dateOutput"
+                            class="mt-4 p-4 rounded-lg bg-pink-500 bg-opacity-20 border border-pink-500 border-opacity-50 hidden">
+                            <p class="text-white text-sm">Selamat ulang tahun🥳🎉:</p>
                             <p class="text-2xl font-bold text-pink-300" id="dateValue">-</p>
                         </div>
                     </div>
+
+                    <!-- Class -->
+                    <div class="form-group md:col-span-2">
+                        <label class="block text-white font-semibold mb-3 text-lg">Jabatan💸</label>
+                        <div class="flex gap-3 flex-wrap">
+                            <button class="class-btn" data-class="Presiden">Presiden</button>
+                            <button class="class-btn" data-class="Wakil Presiden">Wakil Presiden</button>
+                            <button class="class-btn" data-class="Gubernur">Gubernur</button>
+                            <button class="class-btn" data-class="Wali Kota">Wali Kota</button>
+                            <button class="class-btn" data-class="Bupati">Bupati</button>
+                            <button class="class-btn" data-class="Camat">Camat</button>
+                            <button class="class-btn" data-class="Lurah">Lurah</button>
+                        </div>
+                    </div>
+
+                    <!-- Upload Foto -->
+                    <div class="form-group md:col-span-2">
+                        <label class="block text-white font-semibold mb-3 text-lg">📷 Upload Foto </label>
+                        <input type="file" id="inputPhoto" accept="image/*"
+                            class="w-full px-4 py-3 rounded-lg bg-white bg-opacity-90 text-gray-800 font-semibold border-2 border-purple-500 focus:outline-none focus:border-pink-500 transition">
+                    </div>
+
+                    <!-- Download Button -->
+                    <div class="md:col-span-2">
+                        <button id="downloadBtn"
+                            class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition transform hover:scale-105 text-lg tracking-wider">
+                            📥 Download ID Card😉
+                        </button>
+                    </div>
+
                 </div>
             </div>
 
@@ -154,34 +449,85 @@
     </section>
 
     <script>
-        // Handle Select Form
+        // Generate random ID on load
+        document.getElementById('cId').textContent = String(Math.floor(Math.random() * 1000000)).padStart(6, '0');
+
+        // Nama
+        document.getElementById('inputName').addEventListener('input', function () {
+            document.getElementById('cName').textContent = this.value.trim().toUpperCase() || '—';
+        });
+
+        // Pendidikan
         const selectForm = document.getElementById('selectForm');
         const selectOutput = document.getElementById('selectOutput');
         const selectValue = document.getElementById('selectValue');
 
-        selectForm.addEventListener('change', function() {
+        selectForm.addEventListener('change', function () {
             if (this.value) {
                 selectValue.textContent = this.value;
                 selectOutput.classList.remove('hidden');
+                document.getElementById('cEdu').textContent = this.value;
             } else {
                 selectOutput.classList.add('hidden');
+                document.getElementById('cEdu').textContent = '—';
             }
         });
 
-        // Handle Date Form
+        // Tanggal Lahir
         const dateForm = document.getElementById('dateForm');
         const dateOutput = document.getElementById('dateOutput');
         const dateValue = document.getElementById('dateValue');
 
-        dateForm.addEventListener('change', function() {
+        dateForm.addEventListener('change', function () {
             if (this.value) {
-                const selectedDate = new Date(this.value);
-                const options = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
-                const formattedDate = selectedDate.toLocaleDateString('id-ID', options);
-                dateValue.textContent = formattedDate;
+                const d = new Date(this.value);
+                const formatted = d.toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' });
+                const short = d.toLocaleDateString('id-ID', { year: 'numeric', month: '2-digit', day: '2-digit' });
+                dateValue.textContent = formatted;
                 dateOutput.classList.remove('hidden');
+                document.getElementById('cDob').textContent = short;
             } else {
                 dateOutput.classList.add('hidden');
+                document.getElementById('cDob').textContent = '—';
+            }
+        });
+
+        // Class buttons
+        document.querySelectorAll('.class-btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                document.querySelectorAll('.class-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                document.getElementById('cClass').textContent = this.dataset.class;
+            });
+        });
+
+        // Upload foto
+        document.getElementById('inputPhoto').addEventListener('change', function (e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (ev) {
+                    const img = document.getElementById('cPhoto');
+                    const placeholder = document.getElementById('cPhotoPlaceholder');
+                    img.src = ev.target.result;
+                    img.style.display = 'block';
+                    placeholder.style.display = 'none';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Download ID Card
+        document.getElementById('downloadBtn').addEventListener('click', async function () {
+            const card = document.getElementById('idCardPreview');
+            try {
+                const canvas = await html2canvas(card, { scale: 3, useCORS: true, backgroundColor: '#f5f0e8' });
+                const link = document.createElement('a');
+                link.href = canvas.toDataURL('image/png');
+                link.download = 'id-card.png';
+                link.click();
+            } catch (err) {
+                alert('Gagal download: ' + err.message);
             }
         });
     </script>
